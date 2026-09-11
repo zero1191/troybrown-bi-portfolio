@@ -12,7 +12,7 @@ I'm a Business Intelligence professional with 11+ years at Publix Super Markets,
 
 My work sits at the intersection of **analytics engineering, data storytelling, and strategic consulting** — bridging the gap between technical data infrastructure and business leadership.
 
-**Core stack:** Power BI · Alteryx · Databricks · SQL · Power Automate · Power Apps
+**Core stack:** Power BI · Alteryx · Databricks · SQL · Excel · Power Automate · Power Apps
 
 ---
 
@@ -26,6 +26,17 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
 | **Cloud** | Microsoft Azure (AZ-900 Certified) |
 | **Analytics** | Marketing Analytics, Financial Analytics, KPI Development |
 | **Collaboration** | Stakeholder Consulting, Cross-functional Teams, Mentoring |
+
+Power BI Desktop     ████████████████████  Expert
+Alteryx              ██████████████████░░  Advanced
+DAX                  ██████████████████░░  Advanced
+Power Query (M)      ████████████████░░░░  Proficient
+SQL                  ████████████████░░░░  Proficient
+Excel / Power Pivot  ████████████████████  Expert
+Power Automate       ██████████████████░░  Advanced
+Power Apps           ████████████████░░░░  Proficient
+Python (pandas)      ██████████░░░░░░░░░░  Familiar
+Azure Data Services  ██████████░░░░░░░░░░  Familiar
 
 ---
 
