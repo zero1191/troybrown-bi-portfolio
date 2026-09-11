@@ -12,7 +12,7 @@ I'm a Business Intelligence professional with 11+ years at Publix Super Markets,
 
 My work sits at the intersection of **analytics engineering, data storytelling, and strategic consulting** — bridging the gap between technical data infrastructure and business leadership.
 
-**Core stack:** Power BI · Alteryx · Databricks · SQL · Tableau · Azure
+**Core stack:** Power BI · Alteryx · Databricks · SQL · Power Automate · Power Apps
 
 ---
 
@@ -20,75 +20,93 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
 
 | Category | Tools & Technologies |
 |---|---|
-| **Visualization** | Power BI (DAX, Power Query, Report Server), Tableau |
+| **Visualization** | Power BI (DAX, Power Query, Report Server) |
 | **Data Engineering** | Alteryx Designer & Server, Databricks, Apache Spark |
-| **Databases & Query** | SQL Server, T-SQL, Data Modeling, ETL Design |
+| **Databases & Query** | SQL Server, Spark SQL, Data Modeling, ETL Design |
 | **Cloud** | Microsoft Azure (AZ-900 Certified) |
 | **Analytics** | Marketing Analytics, Financial Analytics, KPI Development |
-| **Collaboration** | Executive Stakeholder Consulting, Cross-functional Teams, Mentoring |
+| **Collaboration** | Stakeholder Consulting, Cross-functional Teams, Mentoring |
 
 ---
 
-## 📊 Featured Projects
+<!-- ============================================================
+     FEATURED REPORTS
+     ============================================================ -->
 
-### 1. Brand Marketing Executive Dashboard Suite
-**Tools:** Power BI · Alteryx · Databricks · SQL
-**Role:** Marketing Business Analytics Senior Consultant (2026–Present)
+## ⭐ Featured Reports
 
-Architected a suite of executive-level Power BI dashboards for senior Brand Marketing leadership to monitor campaign ROI, brand KPIs, and competitive market trends in near-real-time. Built Alteryx workflows to automate data extraction and transformation, and leveraged Databricks to process large-scale marketing datasets.
+> Click any **Live Report** link to open the interactive Power BI dashboard.
 
-**Impact:** Reduced manual reporting cycle time significantly; enabled self-service analytics for non-technical marketing stakeholders.
-
----
-
-### 2. Marketing Campaign Performance & ROI Tracker
-**Tools:** Power BI · Alteryx · Databricks
-**Role:** Marketing Business Analytics Consultant (2024–2026)
-
-Designed and published interactive Power BI reports tracking campaign performance, spend efficiency, and audience engagement across multiple marketing channels. Integrated data from disparate sources via Alteryx into a unified data model powering a single source of truth.
-
-**Impact:** Empowered marketing leadership to make data-driven budget allocation decisions.
+| # | Project | Category | Live Report |
+|---|---|---|---|
+| 1 | <!-- TODO: Project name --> | <!-- TODO: e.g. Sales --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
+| 2 | <!-- TODO: Project name --> | <!-- TODO: e.g. Finance --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
+| 3 | <!-- TODO: Project name --> | <!-- TODO: e.g. Operations --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
+| 4 | <!-- TODO: Project name --> | <!-- TODO: e.g. HR Analytics --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
 
 ---
 
-### 3. Pharmacy Financial Consultation Reporting Suite
-**Tools:** Power BI · Tableau · Alteryx
-**Role:** Business Consultant – Pharmacy Team (2023–2024)
+<!-- ============================================================
+     PROJECT 1
+     ============================================================ -->
 
-Delivered financial and operational dashboards for Pharmacy executive leadership covering revenue tracking, cost analysis, staffing optimization, and inventory management — replacing manual Excel-based processes.
+## 📁 Project 1 — <!-- TODO: Project Title -->
 
-**Impact:** Enabled pharmacy leadership to shift from reactive to proactive decision-making through automated reporting.
+**Category:** <!-- TODO: e.g., Sales Performance -->  
+**Data Source:** <!-- TODO: e.g., SQL Server / Excel / SharePoint -->  
+**Tools Used:** Power BI Desktop · DAX · Power Query
 
----
+### Overview
 
-### 4. Pharmacy BI Reporting Platform
-**Tools:** Alteryx · Tableau · Power BI
-**Role:** Sr Business Analyst (2020–2023)
+<!-- TODO: Write 2–4 sentences describing what this dashboard does, the business problem it solves,
+           and the key audience (e.g., regional sales managers, finance team). -->
 
-Built and maintained a full reporting ecosystem for the Pharmacy business area. Managed recurring operational reports and ad-hoc analytical tools. Automated workflows to improve accuracy and reduce cycle time on weekly and monthly delivery.
+### Key Features
 
-**Impact:** Standardized Pharmacy reporting across the business unit with reliable, repeatable outputs.
+- <!-- TODO: Feature 1 — e.g., "YTD vs. prior-year sales comparison with drill-through by region" -->
+- <!-- TODO: Feature 2 — e.g., "Dynamic top-N product rankings using DAX RANKX" -->
+- <!-- TODO: Feature 3 — e.g., "Slicers for date range, territory, and product category" -->
+- <!-- TODO: Feature 4 — e.g., "Tooltip pages showing sparkline trends on hover" -->
 
----
+### Screenshot
 
-### 5. Vendor Rebate Database & Reconciliation System
-**Tools:** Microsoft Access · SQL · Excel
-**Role:** Vendor Rebate Analyst (2018–2019)
+<!-- TODO: Replace the src with your actual screenshot path.
+           Place images in an /assets/images/ folder in your repo. -->
+![Project 1 Dashboard Screenshot](assets/images/project1-screenshot.png)
 
-Designed and maintained Access databases for vendor rebate invoicing, research, and financial reconciliation, converting manual tracking into structured, auditable data systems.
+*Figure 1: <!-- TODO: Brief caption describing what's shown in the screenshot -->*
+
+### 🔗 Interactive Report
+
+<!-- TODO: Replace the iframe src with your Power BI Publish to Web embed URL.
+           Get it from: Power BI Service → File → Embed Report → Publish to Web.
+           Remove the HTML comment tags to activate the embed. -->
+
+<!--
+<iframe
+  title="<!-- TODO: Report title -->"
+  width="100%"
+  height="541.25"
+  src="<!-- TODO: Paste your Publish to Web embed URL here -->"
+  frameborder="0"
+  allowFullScreen="true">
+</iframe>
+-->
+
+> 🔗 **[Open full interactive report in new tab](<!-- TODO: Paste Publish to Web URL -->)**
 
 ---
 
 ## 🎯 Target Roles
 
-I'm exploring senior BI and analytics consulting opportunities focused on:
+I'm exploring senior BI developer and analytics consulting opportunities focused on:
 
-- Enterprise Power BI / Tableau reporting strategy and governance
+- Enterprise Power BI reporting strategy and governance
 - Scalable self-service analytics platforms for business users
 - Data-informed decision-making at the leadership level
 - Analytics team mentorship and BI best-practice champions
 
-**Open to:** BI Developer · Analytics Consultant · Senior Data Analyst · Analytics Engineering · BI Lead
+**Open to:** BI Developer · Analytics Consultant · Senior BI Analyst · Analytics Engineering · BI Lead
 
 ---
 
@@ -97,24 +115,6 @@ I'm exploring senior BI and analytics consulting opportunities focused on:
 | Certification | Issuer | Issued |
 |---|---|---|
 | Microsoft Certified: Azure Fundamentals (AZ-900) | Microsoft | August 2026 |
-
----
-
-## 🎓 Education
-
-**Bachelor of Science in Business Administration** — *Summa Cum Laude*
-North Greenville University | Accounting Minor | 2012–2014
-
-**Associate of Arts in Liberal Arts**
-Polk State College | 2011–2012
-
----
-
-## 📬 Let's Connect
-
-- **LinkedIn:** [linkedin.com/in/troy-m-brown](https://www.linkedin.com/in/troy-m-brown)
-- **Email:** troybrownzero@gmail.com
-- **Portfolio:** [zero1191.github.io/troybrown-bi-portfolio](https://zero1191.github.io/troybrown-bi-portfolio/)
 
 ---
 *Last updated: September 2026*
