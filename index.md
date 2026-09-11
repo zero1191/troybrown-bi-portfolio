@@ -65,16 +65,15 @@ Azure Data Services  ██████████░░░░░░░░░�
      PROJECT 1
      ============================================================ -->
 
-## 📁 Project 1 — US Home Values
+## 📁 Project 3 — US Home Values
 
-**Category:** <!-- TODO: e.g., Sales Performance -->  
-**Data Source:** <!-- TODO: e.g., SQL Server / Excel / SharePoint -->  
-**Tools Used:** Power BI Desktop · DAX · Power Query
+**Category:** Real Estate Trends  
+**Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted 
+**Tools Used:** Power BI Desktop · DAX · Power Query · Power BI Service
 
 ### Overview
 
-<!-- TODO: Write 2–4 sentences describing what this dashboard does, the business problem it solves,
-           and the key audience (e.g., regional sales managers, finance team). -->
+This report provides a unified view of long‑term real estate trends across every U.S. state, with the ability to drill down into counties, cities, and even ZIP codes. It solves a core business problem by transforming fragmented housing data into clear insights on appreciation, volatility, and compound annual growth rates, helping leaders evaluate market performance and identify emerging opportunities. The primary audience of this report could include real estate analysts, investment teams, or strategy leaders who need fast, data‑driven visibility into how home values evolve over time and where growth is accelerating or slowing.
 
 ### Key Features
 
