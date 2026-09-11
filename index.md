@@ -39,9 +39,9 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
 
 | # | Project | Category | Live Report |
 |---|---|---|---|
-| 1 | <!-- TODO: Project name --> | <!-- TODO: e.g. Sales --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
+| 1 | US Home Values | Real Estate | [View Report](https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9) |
 | 2 | <!-- TODO: Project name --> | <!-- TODO: e.g. Finance --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
-| 3 | <!-- TODO: Project name --> | <!-- TODO: e.g. Operations --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
+| 3 | US Home Values | Real Estate | [View Report](https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9) |
 | 4 | <!-- TODO: Project name --> | <!-- TODO: e.g. HR Analytics --> | [View Report](<!-- TODO: Paste Publish to Web URL -->) |
 
 ---
@@ -50,7 +50,7 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
      PROJECT 1
      ============================================================ -->
 
-## 📁 Project 1 — <!-- TODO: Project Title -->
+## 📁 Project 1 — US Home Values
 
 **Category:** <!-- TODO: e.g., Sales Performance -->  
 **Data Source:** <!-- TODO: e.g., SQL Server / Excel / SharePoint -->  
@@ -82,16 +82,14 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
            Get it from: Power BI Service → File → Embed Report → Publish to Web.
            Remove the HTML comment tags to activate the embed. -->
 
-<!--
 <iframe
   title="<!-- TODO: Report title -->"
   width="100%"
   height="541.25"
-  src="<!-- TODO: Paste your Publish to Web embed URL here -->"
+  src="https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9"
   frameborder="0"
   allowFullScreen="true">
 </iframe>
--->
 
 > 🔗 **[Open full interactive report in new tab](<!-- TODO: Paste Publish to Web URL -->)**
 
