@@ -8,7 +8,7 @@
 
 ## 👋 About Me
 
-I'm a Business Intelligence professional with 11+ years at Publix Super Markets, specializing in transforming raw data into executive-ready insights and scalable self-service analytics platforms. Promoted to **Marketing Business Analytics Senior Consultant** in January 2026, I lead BI strategy for the Brand Marketing team — architecting Power BI dashboards, Alteryx automation workflows, and Databricks data pipelines that drive multi-million-dollar marketing decisions.
+I'm a Business Intelligence professional with 11+ years at Publix Super Markets, specializing in business intelligence, data visualization, and analytics consulting. Promoted to **Marketing Business Analytics Senior Consultant** in January 2026, I lead advanced analytics and BI initiatives for the Marketing Analytics team — architecting Power BI dashboards, Alteryx automation workflows, and Databricks data pipelines that drive marketing decisions.
 
 My work sits at the intersection of **analytics engineering, data storytelling, and strategic consulting** — bridging the gap between technical data infrastructure and business leadership.
 
