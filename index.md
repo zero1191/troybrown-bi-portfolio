@@ -1,7 +1,8 @@
 # Troy Brown — Power BI & Business Intelligence Portfolio
 
-**Marketing Business Analytics Senior Consultant | Publix Super Markets**
-📍 Lakeland, FL | 🔗 [LinkedIn](https://www.linkedin.com/in/troy-m-brown) | 💼 [Portfolio](https://zero1191.github.io/troybrown-bi-portfolio/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/troy-m-brown)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/zero1191)
+[![Email](https://img.shields.io/badge/Email-Contact-red?logo=gmail)](mailto:troybrownzero@gmail.com)
 
 ---
 
