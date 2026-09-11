@@ -83,7 +83,7 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
            Remove the HTML comment tags to activate the embed. -->
 
 <iframe
-  title="<!-- TODO: Report title -->"
+  title="Us Home Values"
   width="100%"
   height="541.25"
   src="https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9"
@@ -91,7 +91,7 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
   allowFullScreen="true">
 </iframe>
 
-> 🔗 **[Open full interactive report in new tab](<!-- TODO: Paste Publish to Web URL -->)**
+> 🔗 **[Open full interactive report in new tab](https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9)**
 
 ---
 
