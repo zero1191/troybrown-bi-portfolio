@@ -27,6 +27,8 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
 | **Analytics** | Marketing Analytics, Financial Analytics, KPI Development |
 | **Collaboration** | Stakeholder Consulting, Cross-functional Teams, Mentoring |
 
+<br>
+
 ```
 Power BI Desktop     ████████████████████  Expert
 Alteryx              ██████████████████░░  Advanced
