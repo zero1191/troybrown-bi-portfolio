@@ -27,6 +27,7 @@ My work sits at the intersection of **analytics engineering, data storytelling, 
 | **Analytics** | Marketing Analytics, Financial Analytics, KPI Development |
 | **Collaboration** | Stakeholder Consulting, Cross-functional Teams, Mentoring |
 
+```
 Power BI Desktop     ████████████████████  Expert
 Alteryx              ██████████████████░░  Advanced
 DAX                  ██████████████████░░  Advanced
@@ -37,6 +38,7 @@ Power Automate       ██████████████████░�
 Power Apps           ████████████████░░░░  Proficient
 Python (pandas)      ██████████░░░░░░░░░░  Familiar
 Azure Data Services  ██████████░░░░░░░░░░  Familiar
+```
 
 ---
 
