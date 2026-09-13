@@ -77,10 +77,11 @@ This report provides a unified view of long‑term real estate trends across eve
 
 ### Key Features
 
-- <!-- TODO: Feature 1 — e.g., "YTD vs. prior-year sales comparison with drill-through by region" -->
-- <!-- TODO: Feature 2 — e.g., "Dynamic top-N product rankings using DAX RANKX" -->
-- <!-- TODO: Feature 3 — e.g., "Slicers for date range, territory, and product category" -->
-- <!-- TODO: Feature 4 — e.g., "Tooltip pages showing sparkline trends on hover" -->
+- Rules based dynamic drillthrough button and field parameters to switch between county, city, and zip code detail.
+- Collapsible filter pane and info panes utilizing bookmarks and boomark navigation.
+- Custom report page for tooltips with timeseries data and CAGR calculation.
+- Shape map visual with color gradient for growth rate by state.
+- Time intelligence measures for calculating YoY growth rates.
 
 ### Screenshot
 
