@@ -22,7 +22,6 @@ My goal is to showcase not only technical execution, but also **business impact*
 - **index.md** — Main GitHub Pages landing page  
 - **README.md** — Overview of the portfolio (this file)  
 - **/assets/** — Images, screenshots, and supporting visuals   
-- **/datasets/** — Sample or anonymized datasets used in projects 
 
 ---
 
