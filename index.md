@@ -62,7 +62,7 @@ Azure Data Services  ██████████░░░░░░░░░�
 ---
 
 <!-- ============================================================
-     PROJECT 1
+     PROJECT 3
      ============================================================ -->
 
 ## 📁 Project 3 — US Home Values
@@ -87,9 +87,9 @@ This report provides a unified view of long‑term real estate trends across eve
 
 <!-- TODO: Replace the src with your actual screenshot path.
            Place images in an /assets/images/ folder in your repo. -->
-![Project 1 Dashboard Screenshot](assets/images/project1-screenshot.png)
+![Project 3 Dashboard Screenshot](assets/images/project3.png)
 
-*Figure 1: <!-- TODO: Brief caption describing what's shown in the screenshot -->*
+*Figure 1: Homepage of the report showing collapsible filter pane, custom tooltip, and dynamic drillthrough button*
 
 ### 🔗 Interactive Report
 
