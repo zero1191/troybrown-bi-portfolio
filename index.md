@@ -62,10 +62,59 @@ Azure Data Services  ██████████░░░░░░░░░�
 ---
 
 <!-- ============================================================
+     PROJECT 1
+     ============================================================ -->
+
+## 🏡 Project 3 — US Home Values
+
+**Category:** Real Estate Trends  
+**Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted 
+**Tools Used:** Power BI Desktop · DAX · Power Query · Power BI Service
+
+### Overview
+
+This report provides a unified view of long‑term real estate trends across every U.S. state, with the ability to drill down into counties, cities, and even ZIP codes. It solves a core business problem by transforming fragmented housing data into clear insights on appreciation, volatility, and compound annual growth rates, helping leaders evaluate market performance and identify emerging opportunities. The primary audience of this report could include real estate analysts, investment teams, or strategy leaders who need fast, data‑driven visibility into how home values evolve over time and where growth is accelerating or slowing.
+
+### Key Features
+
+- Rules based dynamic drillthrough button and field parameters to switch between county, city, and zip code detail.
+- Collapsible filter pane and info panes utilizing bookmarks and boomark navigation.
+- Custom report page for tooltips with timeseries data and CAGR calculation.
+- Shape map visual with color gradient for growth rate by state.
+- Time intelligence measures for calculating YoY growth rates.
+
+### Screenshot
+
+<!-- TODO: Replace the src with your actual screenshot path.
+           Place images in an /assets/images/ folder in your repo. -->
+![Project 3 Dashboard Screenshot](assets/images/project3.png)
+
+*Figure 1: Homepage of the report showing collapsible filter pane, custom tooltip, and dynamic drillthrough button*
+
+### 🔗 Interactive Report
+
+<!-- TODO: Replace the iframe src with your Power BI Publish to Web embed URL.
+           Get it from: Power BI Service → File → Embed Report → Publish to Web.
+           Remove the HTML comment tags to activate the embed. -->
+
+<iframe
+  title="Us Home Values"
+  width="100%"
+  height="541.25"
+  src="https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9"
+  frameborder="0"
+  allowFullScreen="true">
+</iframe>
+
+> 🔗 **[Open full interactive report in new tab](https://app.powerbi.com/view?r=eyJrIjoiYTU4YzIyMzAtZDQ0MS00ZTY5LWI0M2UtY2ZiOWZlOTllNGU0IiwidCI6ImY3ZmVmZWQ2LWYzNzktNDU3OS1iM2YwLWE0ZWZiZTFhN2RkZiJ9)**
+
+---
+
+<!-- ============================================================
      PROJECT 3
      ============================================================ -->
 
-## 📁 Project 3 — US Home Values
+## 🏡 Project 3 — US Home Values
 
 **Category:** Real Estate Trends  
 **Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted 
