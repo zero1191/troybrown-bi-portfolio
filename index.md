@@ -68,7 +68,7 @@ Azure Data Services  ██████████░░░░░░░░░�
 ## 🏡 Project 3 — US Home Values
 
 **Category:** Real Estate Trends  
-**Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted 
+**Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted  
 **Tools Used:** Power BI Desktop · DAX · Power Query · Power BI Service
 
 ### Overview
