@@ -1,0 +1,280 @@
+table 'Measures Table'
+	lineageTag: d7174817-9211-41dd-a972-8e5a2c926c0c
+
+	measure 'Max Value' =
+			
+			MAX(
+			    'Economic Data'[Value]
+			)
+		displayFolder: Core Metric
+		lineageTag: 3967e706-22c2-4819-93a0-479a83d28e21
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Latest Date' = ```
+			
+			LASTNONBLANK(
+			    'Calendar'[Date], 
+			    [Max Value]
+			)
+			```
+		formatString: Short Date
+		displayFolder: Date Calcs
+		lineageTag: 179708a7-f7d3-4acb-a7c3-ddaff03d1448
+
+	measure 'Latest Value' =
+			
+			VAR LatestDate = [Latest Date]
+			
+			RETURN
+			CALCULATE(
+			    [Max Value],
+			    'Calendar'[Date] = LatestDate
+			)
+		displayFolder: Time Based Calcs
+		lineageTag: 24c27ac9-76a7-4a32-884a-70b3a55a1c77
+
+		formatStringDefinition =
+				SWITCH(
+				    TRUE(),
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Real GDP",
+				        "Core CPI",
+				        "Headline CPI",
+				        "Consumer Sentiment"
+				    },
+				    "#,##0.0",
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Upper Bound",
+				        "Lower Bound",
+				        "Fed Funds Rate"
+				    },
+				    "0.00%",
+				
+				    "0.0%"
+				)
+
+	measure 'Prior Year Value' =
+			
+			VAR PriorYearDate = [Prior Year Date]
+			
+			RETURN
+			CALCULATE(
+			    [Max Value],
+			    'Calendar'[Date] = PriorYearDate
+			)
+		displayFolder: Time Based Calcs
+		lineageTag: 3a224c9e-2f73-4414-b768-e7dd8e1c4c0b
+
+		formatStringDefinition =
+				SWITCH(
+				    TRUE(),
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Real GDP",
+				        "Core CPI",
+				        "Headline CPI",
+				        "Consumer Sentiment"
+				    },
+				    "#,##0.0",
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Upper Bound",
+				        "Lower Bound",
+				        "Fed Funds Rate"
+				    },
+				    "0.00%",
+				
+				    "0.0%"
+				)
+
+	measure 'Prior Value' =
+			
+			VAR PriorDate = [Prior Date]
+			
+			RETURN
+			CALCULATE(
+			    [Max Value],
+			    'Calendar'[Date] = PriorDate
+			)
+		displayFolder: Time Based Calcs
+		lineageTag: 2b8f4353-30f5-433d-bcd3-d6b3de799a5b
+
+		formatStringDefinition =
+				SWITCH(
+				    TRUE(),
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Real GDP",
+				        "Core CPI",
+				        "Headline CPI",
+				        "Consumer Sentiment"
+				    },
+				    "#,##0.0",
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Upper Bound",
+				        "Lower Bound",
+				        "Fed Funds Rate"
+				    },
+				    "0.00%",
+				
+				    "0.0%"
+				)
+
+	measure 'Prior Date' =
+			
+			VAR LatestDate = [Latest Date]
+			RETURN
+			CALCULATE(
+			    LASTNONBLANK('Calendar'[Date], [Max Value]),
+			    'Calendar'[Date] < LatestDate
+			)
+		formatString: Short Date
+		displayFolder: Date Calcs
+		lineageTag: e07f3b2f-b2af-4ce6-91a6-bd363c8b88d7
+
+	measure 'Prior Year Date' =
+			
+			VAR LatestDate = [Latest Date]
+			VAR TargetDate = EDATE([Latest Date], -12)
+			RETURN
+			CALCULATE(
+			    LASTNONBLANK('Calendar'[Date], [Max Value]),
+			    'Calendar'[Date] <= TargetDate
+			)
+		formatString: Short Date
+		displayFolder: Date Calcs
+		lineageTag: 388b8ce8-1b59-4c61-8222-c19dd097f419
+
+	measure 'Chg vs Prior Value' =
+			
+			[Latest Value] - [Prior Value]
+		lineageTag: 031067dc-b8f6-463e-a32c-ca32c72e062e
+
+		formatStringDefinition =
+				SWITCH(
+				    TRUE(),
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Real GDP",
+				        "Core CPI",
+				        "Headline CPI",
+				        "Consumer Sentiment"
+				    },
+				    "#,##0.0",
+				
+				    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+				        "Upper Bound",
+				        "Lower Bound",
+				        "Fed Funds Rate"
+				    },
+				    "0.00%",
+				
+				    "0.0%"
+				)
+
+	measure 'Prior Date Label' =
+			
+			"vs "&
+			IF(
+			    CONTAINSSTRING(SELECTEDVALUE('Economic Data'[Attribute]), "GDP"),
+			    "Q" & FORMAT([Prior Date], "Q YYYY"),
+			    FORMAT([Prior Date], "MMM YYYY")
+			)
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 569718a2-6baa-42c8-acb4-8f4be6760176
+
+	measure 'Chg vs Prior with Arrow' = ```
+			
+			VAR ChangeVal = [Chg vs Prior Value]
+			VAR Arrow =
+			    SWITCH(
+			        TRUE(),
+			        round(ChangeVal,3) > 0, "▲",
+			        round(ChangeVal,3) < 0, "▼",
+			        "▬"
+			    )
+			VAR FormatVal = 
+			SWITCH(
+			    TRUE(),
+			
+			    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+			        "Real GDP",
+			        "Core CPI",
+			        "Headline CPI",
+			        "Consumer Sentiment"
+			    },
+			    FORMAT(ChangeVal, "#,##0.0 pts"),
+			
+			    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+			        "Upper Bound",
+			        "Lower Bound",
+			        "Fed Funds Rate"
+			    },
+			    FORMAT(ChangeVal*100, "0.00 ppt"),
+			
+			    FORMAT(ChangeVal*100,"0.0 ppt")
+			)
+			
+			RETURN
+			    Arrow & " " & FormatVal
+			```
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: d84aaca9-b3bd-4f77-b79a-cb92dc0fa670
+
+	measure 'Chg vs Prior Color' = ```
+			
+			VAR ChangeVal = [Chg vs Prior Value]
+			VAR Color =
+			IF(
+			    CONTAINSSTRING(SELECTEDVALUE('Economic Data'[Attribute]),"GDP") || 
+			    SELECTEDVALUE('Economic Data'[Attribute]) IN {
+			        "Consumer Sentiment"
+			    },
+			    SWITCH(
+			        TRUE(),
+			        round(ChangeVal,3) > 0, "#107C10",
+			        round(ChangeVal,3) < 0, "#E81123",
+			        "#FFB900"
+			    ),
+			    SWITCH(
+			        TRUE(),
+			        round(ChangeVal,3) > 0, "#E81123",
+			        round(ChangeVal,3) < 0, "#107C10",
+			        "#FFB900"
+			    )
+			)
+			
+			RETURN
+			    Color
+			```
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 9640ce7a-3543-419a-b23d-59954f1d4d02
+
+	measure 'Data as of' = ```
+			
+			"Data as of: " & 
+			FORMAT(
+			    MAX('Refresh Date'[RefreshDate]),
+			    "MMM dd, YYYY"
+			)
+			```
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 3d2e2345-fb0c-450f-80bd-deb74b7350e1
+
+	partition 'Measures Table' = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				  #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

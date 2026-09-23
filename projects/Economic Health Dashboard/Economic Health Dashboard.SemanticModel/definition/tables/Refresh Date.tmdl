@@ -1,0 +1,40 @@
+table 'Refresh Date'
+	lineageTag: 5eab66b7-7224-4893-9ae6-a794ade21a12
+
+	column RefreshDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b7355b68-0c4b-429c-822c-0801295e70ce
+		summarizeBy: none
+		sourceColumn: RefreshDate
+
+		variation Variation
+			isDefault
+			relationship: 34af0878-d096-42e6-9f91-7c3aab10dc90
+			defaultHierarchy: LocalDateTable_4dd6f533-4887-46e6-bbb4-52de70e0ba98.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Refresh Date' = m
+		mode: import
+		source =
+				let
+				    Source = #table(
+				        {"RefreshDate"},
+				        {{DateTimeZone.SwitchZone(
+				DateTimeZone.FixedUtcNow(),
+				-4
+				)}}
+				    ),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"RefreshDate", type date}})
+				in
+				    #"Changed Type"
+
+	changedProperty = Name
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,13 @@
+relationship 50cad929-98b7-10c4-308f-4667b8742173
+	fromColumn: 'Economic Data'.date
+	toColumn: Calendar.Date
+
+relationship 487f426c-68be-04e6-4b0d-e5542391b37b
+	fromColumn: 'Economic Data'.Attribute
+	toColumn: 'Attribute Sorting Table'.Attribute
+
+relationship 34af0878-d096-42e6-9f91-7c3aab10dc90
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Refresh Date'.RefreshDate
+	toColumn: LocalDateTable_4dd6f533-4887-46e6-bbb4-52de70e0ba98.Date
+

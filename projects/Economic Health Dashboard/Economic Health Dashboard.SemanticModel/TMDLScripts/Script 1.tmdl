@@ -1,0 +1,146 @@
+createOrReplace
+
+	table Calendar
+		lineageTag: 4e0dc70b-b657-40f9-87b6-bf13258fe1aa
+		dataCategory: Time
+
+		column Date
+			isKey
+			formatString: Short Date
+			lineageTag: 860cdb90-a6b4-48d7-b2d2-21a520581e06
+			summarizeBy: none
+			isNameInferred
+			sourceColumn: [Date]
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Month Number' =
+				
+				MONTH(
+				    'Calendar'[Date]
+				)
+			formatString: 0
+			lineageTag: 0b7bdcaf-0e13-4fca-bace-68a4ddb19e94
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column Year =
+				
+				YEAR(
+				    'Calendar'[Date]
+				)
+			formatString: 0
+			lineageTag: 499b8a59-031e-476e-be8d-790cf2005096
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Quarter Number' =
+				
+				QUARTER(
+				    'Calendar'[Date]
+				)
+			formatString: 0
+			lineageTag: 1472ccb1-82b7-41e4-88c5-d009c0fdacd4
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column Quarter =
+				
+				"Q" & 'Calendar'[Quarter Number]
+			lineageTag: 04d045c5-a2e9-4a5c-8585-f6ef7c11c9d2
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Month Name' =
+				
+				FORMAT(
+				    'Calendar'[Date],"MMMM"
+				)
+			lineageTag: 148d9779-9df3-4b21-8623-a2008feaae87
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Month Short' =
+				
+				FORMAT(
+				    'Calendar'[Date],
+				    "MMM"
+				)
+			lineageTag: 741052ef-737b-4931-8809-f1723b8e1d03
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Year Month' =
+				
+				'Calendar'[Year] & "-" & FORMAT('Calendar'[Month Number], "00")
+			lineageTag: 77f0a095-9614-4638-b44c-298318c4229b
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Year Month Sort' =
+				
+				'Calendar'[Year]&FORMAT('Calendar'[Month Number],"00")
+			dataType: int64
+			formatString: 0
+			lineageTag: d3e0946c-e030-49ef-8156-ceb5d6934952
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Day of Week Number' =
+				
+				WEEKDAY(
+				    'Calendar'[Date],1
+				)
+			formatString: 0
+			lineageTag: 1a624c06-aab4-4c85-b7a4-13b9e02dcf72
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Day of Month' =
+				
+				DAY('Calendar'[Date])
+			formatString: 0
+			lineageTag: c6b0e1e0-3e1b-43ad-aadd-7b87dfd6239b
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Day Short' =
+				
+				FORMAT(
+				    'Calendar'[Date],
+				    "DDD"
+				)
+			lineageTag: e3b99e94-63e2-4546-9f57-4de787688214
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Day Name' =
+				
+				FORMAT(
+				    'Calendar'[Date],
+				    "DDDD"
+				)
+			lineageTag: 3ba6b1b7-777e-44d7-8d3e-ce3d1baca46c
+			summarizeBy: none
+
+			annotation SummarizationSetBy = Automatic
+
+		partition Calendar = calculated
+			mode: import
+			source =
+					
+					CALENDARAUTO(12)
+
+		annotation PBI_Id = c403989874aa400eaace0241ca1e5662
+

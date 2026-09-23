@@ -1,0 +1,51 @@
+table 'Attribute Sorting Table'
+	lineageTag: 59f8737d-01ab-4e5b-9b3d-03c4c9746628
+
+	column Attribute
+		lineageTag: b3bb5e81-140b-4964-87e2-f5880a1b5c23
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Attribute]
+		sortByColumn: 'Sort Order'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sort Order'
+		formatString: 0
+		lineageTag: 2f954970-23cd-4bce-8a71-e09aa4d09edc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Sort Order]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Attribute Sorting Table' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Attribute",TEXT,
+				    "Sort Order", INT64,
+				    {
+				        {"Headline CPI",1},
+				        {"Headline CPI (YoY)",2},
+				        {"Headline CPI (MoM)",3},
+				        {"Effective Fed Funds Rate",13},
+				        {"Lower Fed Funds Rate",12},
+				        {"Fed Funds Rate",11},
+				        {"10-Yr Treasury Yield",16},
+				        {"30-Yr Mortgage Rates",17},
+				        {"Unemployment Rate",14},
+				        {"Consumer Sentiment",15},
+				        {"Core CPI",4},
+				        {"Core CPI (YoY)",5},
+				        {"Core CPI (MoM)",6},
+				        {"Real GDP",7},
+				        {"Real GDP YoY",8},
+				        {"Real GDP QoQ",9},
+				        {"Real GDP Growth",10}
+				    }
+				)
+
+	annotation PBI_Id = ef46bb46f3da4386b74fe34b64d9140a
+

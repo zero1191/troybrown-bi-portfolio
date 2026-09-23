@@ -1,0 +1,372 @@
+expression 'Headline CPI' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "CPIAUCSL",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filled Down",{"realtime_start", "realtime_end"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns", "PY date", each Date.AddYears([date],-1)),
+		    #"Merged Queries" = Table.NestedJoin(#"Added Custom", {"PY date"}, #"Added Custom", {"date"}, "Added Custom", JoinKind.LeftOuter),
+		    #"Expanded Added Custom" = Table.ExpandTableColumn(#"Merged Queries", "Added Custom", {"value"}, {"value.1"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Added Custom",{{"value.1", "PY Value"}}),
+		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Value YoY", each [value]/[PY Value]-1),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Prior Month Date", each Date.AddMonths([date],-1)),
+		    #"Merged Queries1" = Table.NestedJoin(#"Added Custom2", {"Prior Month Date"}, #"Added Custom2", {"date"}, "Added Custom2", JoinKind.LeftOuter),
+		    #"Expanded Added Custom2" = Table.ExpandTableColumn(#"Merged Queries1", "Added Custom2", {"value"}, {"value.1"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Added Custom2",{{"value.1", "Prior Month Value"}}),
+		    #"Added Custom3" = Table.AddColumn(#"Renamed Columns1", "Value MoM", each [value]/[Prior Month Value]-1),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom3",{"date", "value", "Value YoY", "Value MoM"}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Headline CPI"}, {"Value YoY", "Headline CPI (YoY)"}, {"Value MoM", "Headline CPI (MoM)"}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Renamed Columns2", {"date"}, "Attribute", "Value"),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Other Columns",{{"Value", type number}})
+		in
+		    #"Changed Type1"
+	lineageTag: 8e9d448d-46d3-41dc-9d04-4bfa0c30b7b5
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Fed Rate' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "FEDFUNDS",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filled Down",{"realtime_start", "realtime_end"}),
+		    #"Added Custom2" = Table.AddColumn(#"Removed Columns", "Fed Funds Rate", each [value]/100),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom2",{"value"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns1", "Lower Bound", each Number.RoundDown([Fed Funds Rate]/0.0025)*0.0025),
+		    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Upper Bound", each Number.RoundUp([Fed Funds Rate]/0.0025)*0.0025),
+		    #"Renamed Columns" = Table.RenameColumns(#"Added Custom1",{{"Fed Funds Rate", "Effective Fed Funds Rate"}, {"Lower Bound", "Lower Fed Funds Rate"}, {"Upper Bound", "Fed Funds Rate"}}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns",{{"Effective Fed Funds Rate", type number}, {"Lower Fed Funds Rate", type number}, {"Fed Funds Rate", type number}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Changed Type1", {"date"}, "Attribute", "Value")
+		in
+		    #"Unpivoted Other Columns"
+	lineageTag: 836c7426-86c3-4b10-af0f-c2af5c08fef7
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '10-Year Treasury Yield' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "DGS10",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Filled Down", each ([value] <> null)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"realtime_start", "realtime_end"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns", "10-Yr Treasury Yield", each [value]/100),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"value"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns1",{{"10-Yr Treasury Yield", type number}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Changed Type1", {"date"}, "Attribute", "Value")
+		in
+		    #"Unpivoted Other Columns"
+	lineageTag: 4ce74deb-f858-4499-a285-4cbb4148bc6d
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression '30-Year Mortgage Rates' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "MORTGAGE30US",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Filled Down", each ([value] <> null)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"realtime_start", "realtime_end"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns", "30-Yr Mortgage Rates", each [value]/100),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"value"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns1",{{"30-Yr Mortgage Rates", type number}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Changed Type1", {"date"}, "Attribute", "Value")
+		in
+		    #"Unpivoted Other Columns"
+	lineageTag: eaaabf6f-543f-49d9-aff4-e4bb83eb1294
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Unemployment Rate' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "UNRATE",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Filled Down", each ([value] <> null)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"realtime_start", "realtime_end"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns", "Unemployment Rate", each [value]/100),
+		    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom",{"value"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns1",{{"Unemployment Rate", type number}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Changed Type1", {"date"}, "Attribute", "Value")
+		in
+		    #"Unpivoted Other Columns"
+	lineageTag: 0f100e8d-80d9-4c6d-a1ec-cd263de6bdd8
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Consumer Sentiment' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "UMCSENT",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Filled Down", each ([value] <> null)),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"realtime_start", "realtime_end"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"value", "Consumer Sentiment"}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Renamed Columns", {"date"}, "Attribute", "Value")
+		in
+		    #"Unpivoted Other Columns"
+	lineageTag: ec80e31e-aa2a-431a-94da-e4a7fbe98cd7
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Core CPI' =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "CPILFESL",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filled Down",{"realtime_start", "realtime_end"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns", "PY date", each Date.AddYears([date],-1)),
+		    #"Merged Queries" = Table.NestedJoin(#"Added Custom", {"PY date"}, #"Added Custom", {"date"}, "Added Custom", JoinKind.LeftOuter),
+		    #"Expanded Added Custom" = Table.ExpandTableColumn(#"Merged Queries", "Added Custom", {"value"}, {"value.1"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Added Custom",{{"value.1", "PY Value"}}),
+		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Value YoY", each [value]/[PY Value]-1),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Prior Month Date", each Date.AddMonths([date],-1)),
+		    #"Merged Queries1" = Table.NestedJoin(#"Added Custom2", {"Prior Month Date"}, #"Added Custom2", {"date"}, "Added Custom2", JoinKind.LeftOuter),
+		    #"Expanded Added Custom2" = Table.ExpandTableColumn(#"Merged Queries1", "Added Custom2", {"value"}, {"value.1"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Added Custom2",{{"value.1", "Prior Month Value"}}),
+		    #"Added Custom3" = Table.AddColumn(#"Renamed Columns1", "Value MoM", each [value]/[Prior Month Value]-1),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom3",{"date", "value", "Value YoY", "Value MoM"}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Core CPI"}, {"Value YoY", "Core CPI (YoY)"}, {"Value MoM", "Core CPI (MoM)"}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Renamed Columns2", {"date"}, "Attribute", "Value"),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Other Columns",{{"Value", type number}})
+		in
+		    #"Changed Type1"
+	lineageTag: 35cfb808-37f1-4039-ae89-a32f4443d736
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression GDP =
+		let
+		    Source =
+		        Json.Document(
+		            Web.Contents(
+		                "https://api.stlouisfed.org/fred/series/observations",
+		                [
+		                    Query = [
+		                        series_id = "GDPC1",
+		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        file_type = "json"
+		                    ]
+		                ]
+		            )
+		        ),
+		    Observations = Source[observations],
+		    #"Converted to Table" = Table.FromRecords(Observations),
+		    #"Changed Type" =
+		        Table.TransformColumnTypes(
+		            #"Converted to Table",
+		            {
+		                {"date", type date},
+		                {"value", type number}
+		            }
+		        ),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"value", null}}),
+		    #"Sorted Rows" = Table.Sort(#"Replaced Errors",{{"date", Order.Ascending}}),
+		    #"Filled Down" = Table.FillDown(#"Sorted Rows",{"value"}),
+		    #"Removed Columns" = Table.RemoveColumns(#"Filled Down",{"realtime_start", "realtime_end"}),
+		    #"Added Custom" = Table.AddColumn(#"Removed Columns", "PY date", each Date.AddYears([date],-1)),
+		    #"Merged Queries" = Table.NestedJoin(#"Added Custom", {"PY date"}, #"Added Custom", {"date"}, "Added Custom", JoinKind.LeftOuter),
+		    #"Expanded Added Custom" = Table.ExpandTableColumn(#"Merged Queries", "Added Custom", {"value"}, {"value.1"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Expanded Added Custom",{{"value.1", "PY Value"}}),
+		    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "Value YoY", each [value]/[PY Value]-1),
+		    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Prior Quarter Date", each Date.AddQuarters([date],-1)),
+		    #"Merged Queries1" = Table.NestedJoin(#"Added Custom2", {"Prior Quarter Date"}, #"Added Custom2", {"date"}, "Added Custom2", JoinKind.LeftOuter),
+		    #"Expanded Added Custom2" = Table.ExpandTableColumn(#"Merged Queries1", "Added Custom2", {"value"}, {"value.1"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Added Custom2",{{"value.1", "Prior Quarter Value"}}),
+		    #"Added Custom3" = Table.AddColumn(#"Renamed Columns1", "Value QoQ", each [value]/[Prior Quarter Value]-1),
+		    #"Added Custom4" = Table.AddColumn(#"Added Custom3", "Value QoQ Annualized", each Number.Power(([value] / [Prior Quarter Value]), 4) - 1),
+		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom4",{"date", "value", "Value YoY", "Value QoQ", "Value QoQ Annualized"}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Real GDP"}, {"Value YoY", "Real GDP YoY"}, {"Value QoQ", "Real GDP QoQ"}, {"Value QoQ Annualized", "Real GDP Growth"}}),
+		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Renamed Columns2", {"date"}, "Attribute", "Value"),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Other Columns",{{"Value", type number}})
+		in
+		    #"Changed Type1"
+	lineageTag: 896e4e00-11d4-4f54-95af-d75a0d19daa6
+	queryGroup: 'API Calls'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

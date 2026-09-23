@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Economic Health Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8cb469ae-44d2-4a5a-80fd-510f5a6169bb"
+  }
+}

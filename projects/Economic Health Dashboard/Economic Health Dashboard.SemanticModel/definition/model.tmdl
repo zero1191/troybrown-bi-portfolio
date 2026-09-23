@@ -1,0 +1,29 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'API Calls'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Headline CPI","Fed Rate","10-Year Treasury Yield","30-Year Mortgage Rates","Unemployment Rate","Consumer Sentiment","Economic Data","Measures Table","Core CPI","GDP","Refresh Date"]
+
+annotation PBI_ProTooling = ["DevMode","CalcGroup","DaxQueryView_Desktop","TMDLView_Desktop"]
+
+ref table 'Measures Table'
+ref table Calendar
+ref table 'Economic Data'
+ref table 'Attribute Sorting Table'
+ref table 'Refresh Date'
+ref table DateTableTemplate_74cebb4c-ed27-4d3d-917c-425f6fec41ea
+ref table LocalDateTable_4dd6f533-4887-46e6-bbb4-52de70e0ba98
+
+ref cultureInfo en-US
+
