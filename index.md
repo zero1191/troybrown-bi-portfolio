@@ -116,7 +116,7 @@ This report brings the key indicators of U.S. economic health into a single, alw
 ## 🏡 Project 2 — US Home Values
 
 **Category:** Real Estate Trends  
-**Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted 
+**Data Source:** Zillow Home Value Index (ZHVI) for All Homes Seasonally Adjusted  
 **Tools Used:** Power BI Desktop · DAX · Power Query · Power BI Service
 
 ### Overview
@@ -125,9 +125,9 @@ This report provides a unified view of long‑term real estate trends across eve
 
 ### Key Features
 
-- Rules based dynamic drillthrough button and field parameters to switch between county, city, and zip code detail.
-- Collapsible filter pane and info panes utilizing bookmarks and boomark navigation.
-- Custom report page for tooltips with timeseries data and CAGR calculation.
+- Rules-based dynamic drillthrough button and field parameters to switch between county, city, and ZIP code detail.
+- Collapsible filter pane and info panes utilizing bookmarks and bookmark navigation.
+- Custom report page for tooltips with time-series data and CAGR calculation.
 - Shape map visual with color gradient for growth rate by state.
 - Time intelligence measures for calculating YoY growth rates.
 
