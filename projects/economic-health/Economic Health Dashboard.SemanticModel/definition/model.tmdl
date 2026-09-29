@@ -13,7 +13,7 @@ queryGroup 'API Calls'
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["Headline CPI","Fed Rate","10-Year Treasury Yield","30-Year Mortgage Rates","Unemployment Rate","Consumer Sentiment","Economic Data","Measures Table","Core CPI","GDP","Refresh Date"]
+annotation PBI_QueryOrder = ["Headline CPI","Fed Rate","10-Year Treasury Yield","30-Year Mortgage Rates","Unemployment Rate","Consumer Sentiment","Economic Data","Measures Table","Core CPI","GDP","Refresh Date","API_Key"]
 
 annotation PBI_ProTooling = ["DevMode","CalcGroup","DaxQueryView_Desktop","TMDLView_Desktop"]
 

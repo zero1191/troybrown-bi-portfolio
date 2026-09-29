@@ -7,7 +7,7 @@ expression 'Headline CPI' =
 		                [
 		                    Query = [
 		                        series_id = "CPIAUCSL",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -59,7 +59,7 @@ expression 'Fed Rate' =
 		                [
 		                    Query = [
 		                        series_id = "FEDFUNDS",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -104,7 +104,7 @@ expression '10-Year Treasury Yield' =
 		                [
 		                    Query = [
 		                        series_id = "DGS10",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -147,7 +147,7 @@ expression '30-Year Mortgage Rates' =
 		                [
 		                    Query = [
 		                        series_id = "MORTGAGE30US",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -190,7 +190,7 @@ expression 'Unemployment Rate' =
 		                [
 		                    Query = [
 		                        series_id = "UNRATE",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -233,7 +233,7 @@ expression 'Consumer Sentiment' =
 		                [
 		                    Query = [
 		                        series_id = "UMCSENT",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -274,7 +274,7 @@ expression 'Core CPI' =
 		                [
 		                    Query = [
 		                        series_id = "CPILFESL",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -326,7 +326,7 @@ expression GDP =
 		                [
 		                    Query = [
 		                        series_id = "GDPC1",
-		                        api_key = "25da11622abc26ec314c4a7fb31ff960",
+		                        api_key = API_Key,
 		                        file_type = "json"
 		                    ]
 		                ]
@@ -369,4 +369,12 @@ expression GDP =
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Table
+
+/// API Key for FRED
+expression API_Key = "25da11622abc26ec314c4a7fb31ff960" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: b49249bf-58d0-4b8f-b9b9-e142c9b6ac04
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
 
