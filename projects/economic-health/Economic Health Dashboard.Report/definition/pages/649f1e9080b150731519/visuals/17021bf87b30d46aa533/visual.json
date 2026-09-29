@@ -4,10 +4,10 @@
   "position": {
     "x": 1217.0734528629266,
     "y": 9.62406015037594,
-    "z": 6000,
+    "z": 5000,
     "height": 58.484673221515322,
     "width": 62.926547137073449,
-    "tabOrder": 4004
+    "tabOrder": 6000
   },
   "visual": {
     "visualType": "actionButton",
@@ -185,6 +185,13 @@
                   "Value": "false"
                 }
               }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Info Button'"
+                }
+              }
             }
           }
         }
@@ -196,6 +203,33 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'PageNavigation'"
+                }
+              }
+            },
+            "navigationSection": {
+              "expr": {
+                "Literal": {
+                  "Value": "'948a34d276ae84b1250d'"
                 }
               }
             }

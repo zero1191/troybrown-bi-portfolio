@@ -152,6 +152,14 @@ table Calendar
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Quarter Year' =
+			
+			'Calendar'[Quarter] & " " & 'Calendar'[Year]
+		lineageTag: e4e8c8b4-8b0f-428d-a708-2c91f875bbcd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition Calendar = calculated
 		mode: import
 		source =

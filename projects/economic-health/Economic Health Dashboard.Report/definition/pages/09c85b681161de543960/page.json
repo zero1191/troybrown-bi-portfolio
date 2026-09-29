@@ -1,0 +1,26 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "09c85b681161de543960",
+  "displayName": "Inflation",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "2a0d628642e80db34020",
+      "target": "115f682e967088132c44",
+      "type": "NoFilter"
+    },
+    {
+      "source": "2a0d628642e80db34020",
+      "target": "7d24e5c53d616a89625a",
+      "type": "NoFilter"
+    },
+    {
+      "source": "7d24e5c53d616a89625a",
+      "target": "115f682e967088132c44",
+      "type": "NoFilter"
+    }
+  ]
+}

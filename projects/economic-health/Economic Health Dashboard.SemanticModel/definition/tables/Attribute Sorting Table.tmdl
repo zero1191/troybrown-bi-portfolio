@@ -29,7 +29,7 @@ table 'Attribute Sorting Table'
 				    {
 				        {"Headline CPI",1},
 				        {"Headline CPI (YoY)",2},
-				        {"Headline CPI (MoM)",3},
+				        {"1-Month Change (Headline)",5},
 				        {"Effective Fed Funds Rate",13},
 				        {"Lower Fed Funds Rate",12},
 				        {"Fed Funds Rate",11},
@@ -37,13 +37,13 @@ table 'Attribute Sorting Table'
 				        {"30-Yr Mortgage Rates",17},
 				        {"Unemployment Rate",14},
 				        {"Consumer Sentiment",15},
-				        {"Core CPI",4},
-				        {"Core CPI (YoY)",5},
-				        {"Core CPI (MoM)",6},
+				        {"Core CPI",3},
+				        {"Core CPI (YoY)",4},
+				        {"1-Month Change (Core)",6},
 				        {"Real GDP",7},
-				        {"Real GDP YoY",8},
-				        {"Real GDP QoQ",9},
-				        {"Real GDP Growth",10}
+				        {"Real GDP YoY",9},
+				        {"Real GDP QoQ",10},
+				        {"Real GDP Growth",8}
 				    }
 				)
 

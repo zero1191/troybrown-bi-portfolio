@@ -50,6 +50,24 @@
             }
           ]
         },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Measures Table"
+                    }
+                  },
+                  "Property": "Quarter"
+                }
+              },
+              "queryRef": "Measures Table.Quarter",
+              "nativeQueryRef": "Quarter"
+            }
+          ]
+        },
         "Y": {
           "projections": [
             {
@@ -380,6 +398,19 @@
             }
           }
         }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
@@ -515,20 +546,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "68be3c026bdbda4b0121",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Measures Table"
-              }
-            },
-            "Property": "Latest Value"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

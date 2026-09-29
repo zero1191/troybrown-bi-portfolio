@@ -152,6 +152,7 @@ table 'Measures Table'
 	measure 'Chg vs Prior Value' =
 			
 			[Latest Value] - [Prior Value]
+		displayFolder: Time Based Calcs
 		lineageTag: 031067dc-b8f6-463e-a32c-ca32c72e062e
 
 		formatStringDefinition =
@@ -264,6 +265,295 @@ table 'Measures Table'
 			```
 		displayFolder: Labels and Dynamic Titles
 		lineageTag: 3d2e2345-fb0c-450f-80bd-deb74b7350e1
+
+	measure Quarter =
+			
+			MAX(
+			    'Calendar'[Quarter Year]
+			)
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 08aafdf8-b016-46c8-a67d-4f8d461b2f24
+
+	measure 'Economic Health Summary' = ```
+			
+			VAR headlineCPI = 
+			FORMAT(
+			    CALCULATE(
+			        [Latest Value],
+			        'Economic Data'[Attribute] = "Headline CPI (YoY)"
+			    ),"0.0%"
+			)
+			VAR coreCPI = 
+			FORMAT(
+			    CALCULATE(
+			        [Latest Value],
+			        'Economic Data'[Attribute] = "Core CPI (YoY)"
+			    ),"0.0%"
+			)
+			VAR FoodEnergy = 
+			FORMAT(
+			    (CALCULATE(
+			        [Latest Value],
+			        'Economic Data'[Attribute] = "Headline CPI (YoY)"
+			    ) - 
+			    CALCULATE(
+			        [Latest Value],
+			        'Economic Data'[Attribute] = "Core CPI (YoY)"
+			    ))*100,
+			    "0.0"
+			)
+			VAR GDP = 
+			FORMAT(
+			    CALCULATE(
+			        [Latest Value],
+			        'Economic Data'[Attribute] = "Real GDP Growth"
+			    ),"0.0%"
+			)
+			VAR PQGDP = 
+			FORMAT(
+			    CALCULATE(
+			        [Prior Value],
+			        'Economic Data'[Attribute] = "Real GDP Growth"
+			    ),"0.0%"
+			)
+			VAR GDPChg = 
+			ROUND(
+			    CALCULATE(
+			        [Chg vs Prior Value],
+			        'Attribute Sorting Table'[Attribute] = "Real GDP Growth"
+			    ),
+			    3
+			)
+			VAR GDPUpDown = 
+			SWITCH(
+			    TRUE(),
+			    GDPChg > 0, ", an increase",
+			    gdpchg < 0, ", a decrease",
+			    ", flat"
+			)
+			VAR QuarterName = 
+			LOOKUPVALUE(
+			    'Calendar'[Quarter Year],
+			    'Calendar'[Date],
+			    CALCULATE(
+			        MAX('Economic Data'[date]),
+			        'Economic Data'[Attribute] = "Real GDP Growth"
+			    )
+			)
+			VAR FedRate = 
+			CALCULATE(
+			    [Chg vs Prior Value],
+			    'Economic Data'[Attribute] = "Fed Funds Rate"
+			)
+			VAR FedRateForamtted = 
+			FORMAT(
+			    FedRate,
+			    "0.00%"
+			)
+			VAR Unemployment = 
+			ROUND(
+			    CALCULATE(
+			        [Chg vs Prior Value],
+			        'Economic Data'[Attribute] = "Unemployment Rate"
+			    ),
+			    3
+			)
+			VAR UnemploymentUpDown = 
+			SWITCH(
+			    TRUE(),
+			    Unemployment > 0, "increased",
+			    Unemployment < 0, "decreased",
+			    "remained constant"
+			)
+			VAR Sentiment = 
+			CALCULATE(
+			    [Chg vs Prior Value],
+			    'Economic Data'[Attribute] = "Consumer Sentiment"
+			)
+			VAR SentimentUpDown = 
+			SWITCH(
+			    TRUE(),
+			    Sentiment > 0, "increased",
+			    Sentiment < 0, "decreased",
+			    "remained constant"
+			)
+			VAR FedRateMovement = 
+			SWITCH(
+			    TRUE(),
+			    FedRate > 0, "The fed funds rate increased " & FedRateForamtted & " to help curb inflation and move closer to the feds 2% target. ",
+			    FedRate < 0, "The fed funds rate decreased " & FedRateForamtted & " which will drive down short term interest rates and stimulate economic growth. ",
+			    "The fed funds rate remained flat signaling that current policy is about where the fed thinks it needs to be short of new inflation, employment, or economic growth data. "
+			)
+			VAR Conjunction =
+			 IF(
+			    UnemploymentUpDown = SentimentUpDown,
+			    " also",
+			    ""
+			 )
+			RETURN 
+			"Annualized real GDP growth for " & QuarterName & " was " & GDP & GDPUpDown & " from prior quarters growth rate of " & PQGDP & ". The latest headline CPI shows a year over year increase in inflation of " & headlineCPI & ". Core CPI increased " & coreCPI & " meaning that food and energy impacted headline inflation by approximately " & FoodEnergy & " percentage points relative to core inflation. " & FedRateMovement & "The unemployment rate " & UnemploymentUpDown & " vs the prior month while consumer sentiment" & Conjunction & " " & SentimentUpDown & "."
+			```
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: f2c38bff-e1cf-4257-9b41-4002fca22a14
+
+	measure 'Date Range Filter' = ```
+			
+			VAR SelectedYears = 
+			SELECTEDVALUE('Date Range Selector'[Years])
+			
+			VAR MaxDate = 
+			CALCULATE(
+			    max('Calendar'[Date]),
+			    ALL('Calendar')
+			)
+			
+			VAR StartDate = 
+			DATE(
+			    YEAR(MaxDate) - SelectedYears,
+			    1,
+			    1
+			)
+			
+			RETURN
+			IF(
+			    SELECTEDVALUE('Calendar'[Date]) >= StartDate &&
+			    SELECTEDVALUE('Calendar'[Date]) <= MaxDate,
+			    1,
+			    0
+			)
+			```
+		formatString: 0
+		displayFolder: Filters
+		lineageTag: c67d1fb2-2a14-4518-8a3f-a20d545a7304
+
+	measure 'Core CPI (YoY)' =
+			
+			CALCULATE(
+			    [Latest Value],
+			    'Economic Data'[Attribute] = "Core CPI (YoY)"
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Specific Attribute Measures
+		lineageTag: 43c3ddf4-f68c-4d53-8bf1-e458e1bdbe46
+
+	measure 'Headline CPI (YoY)' =
+			
+			CALCULATE(
+			    [Latest Value],
+			    'Economic Data'[Attribute] = "Headline CPI (YoY)"
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Specific Attribute Measures
+		lineageTag: 0882861e-ea53-4dcb-89d2-c7dee5bced98
+
+	measure 'Food and Energy Impact' =
+			
+			[Headline CPI (YoY)] - [Core CPI (YoY)]
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Specific Attribute Measures
+		lineageTag: 5a82b6c5-d9d5-4cf2-9b60-3047519f074e
+
+	measure 'Purchasing Power of $100' = ```
+			
+			VAR BaseCPI = 
+			CALCULATE(
+			    MIN('Economic Data'[Value]),
+			    ALLSELECTED('Calendar'),
+			    'Economic Data'[Attribute] = "Headline CPI"
+			)
+			
+			RETURN
+			100 * 
+			DIVIDE(
+			    CALCULATE(
+			        [Latest Value],
+			        'Economic Data'[Attribute] = "Headline CPI"
+			    ),
+			    BaseCPI
+			)
+			```
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Specific Attribute Measures
+		lineageTag: 6291700f-22d4-4797-958d-5638c32240d4
+
+	measure 'Purchasing Power Title' = ```
+			
+			VAR MinDate = 
+			FORMAT(
+			    MIN(
+			        'Calendar'[Date]
+			    ),
+			    "MMM yyyy"
+			)
+			
+			RETURN
+			"Purchasing Power of $100 Since " & MinDate
+			```
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 43a50e74-066e-49b2-9880-84b029bee205
+
+	measure 'Latest Readings Title' =
+			
+			Var MaxDate =
+			FORMAT(
+			    [Latest Date],
+			    "MMM YYYY"
+			)
+			
+			RETURN
+			"Latest Readings (" & MaxDate & ")"
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 1b45f237-2b3e-4b57-8360-39c0caa70132
+
+	measure 'Latest GDP Readings Title' =
+			
+			Var MaxDate =
+			FORMAT(
+			    [Latest Date],
+			    "Q YYYY"
+			)
+			
+			RETURN
+			"Latest GDP Readings (Q" & MaxDate & ")"
+		displayFolder: Labels and Dynamic Titles
+		lineageTag: 33da33f6-fca6-43ab-b3be-88dd879c9306
+
+	measure '30-Yr Mortgage Rates' =
+			
+			CALCULATE(
+			    [Latest Value],
+			    'Economic Data'[Attribute] = "30-Yr Mortgage Rates"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Specific Attribute Measures
+		lineageTag: 0c329953-6fa7-4398-90fd-a938bf2db4a6
+
+	measure '10-Yr Treasury Yield' =
+			
+			CALCULATE(
+			    [Latest Value],
+			    'Economic Data'[Attribute] = "10-Yr Treasury Yield"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Specific Attribute Measures
+		lineageTag: bf09ba8f-7aac-49b4-b234-a384b61775f2
+
+	measure 'Mortgage Spread' =
+			
+			[30-Yr Mortgage Rates] - [10-Yr Treasury Yield]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Specific Attribute Measures
+		lineageTag: 56c3f679-b138-450b-9716-aefa9841d1f7
+
+	measure 'Fed Funds Rate' =
+			
+			CALCULATE(
+			    [Latest Value],
+			    'Economic Data'[Attribute] = "Fed Funds Rate"
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Specific Attribute Measures
+		lineageTag: d8902c30-e8af-480a-ae7d-b2752e36c757
 
 	partition 'Measures Table' = m
 		mode: import

@@ -4,7 +4,7 @@
   "position": {
     "x": 141.40314136125656,
     "y": 85.109947643979055,
-    "z": 2000,
+    "z": 4500,
     "height": 178.26178010471205,
     "width": 1139.9371727748692,
     "tabOrder": 0
@@ -1183,26 +1183,25 @@
             }
           }
         }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
-      {
-        "name": "e8c34c83204926e00bd0",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Measures Table"
-              }
-            },
-            "Property": "Latest Value"
-          }
-        },
-        "type": "Advanced"
-      },
       {
         "name": "7e17ec82be420777b37d",
         "field": {

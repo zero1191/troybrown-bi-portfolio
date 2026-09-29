@@ -1,0 +1,48 @@
+table 'Date Range Selector'
+	lineageTag: bb408fca-e199-4cd5-baa7-09978e21117c
+
+	column Years
+		formatString: 0
+		lineageTag: aecf5552-4aea-4085-a492-fd0f90e27983
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Years]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Range'
+		lineageTag: 103c92d6-e77f-416b-b0c4-7cff9d2e6ab9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date Range]
+		sortByColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		formatString: 0
+		lineageTag: c5a4696d-d5a8-400c-9853-88effb13cb38
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Date Range Selector' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "Sort", INTEGER,
+				    "Years", INTEGER,
+				    "Date Range", TEXT,
+				    {
+				        {0, 5, "Last 5 Years"},
+				        {1, 10, "Last 10 Years"},
+				        {2, 20, "Last 20 Years"},
+				        {3, 30, "Last 30 Years"}
+				    }
+				)
+
+	annotation PBI_Id = f14baac80be440b0a63fd52502cffab3
+

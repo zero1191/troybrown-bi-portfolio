@@ -24,6 +24,7 @@ ref table 'Attribute Sorting Table'
 ref table 'Refresh Date'
 ref table DateTableTemplate_74cebb4c-ed27-4d3d-917c-425f6fec41ea
 ref table LocalDateTable_4dd6f533-4887-46e6-bbb4-52de70e0ba98
+ref table 'Date Range Selector'
 
 ref cultureInfo en-US
 

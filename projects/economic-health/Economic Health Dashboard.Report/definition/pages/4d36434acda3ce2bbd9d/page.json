@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "4d36434acda3ce2bbd9d",
+  "displayName": "Relationships",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "df07bed970d7c837b92a",
+      "target": "23275a863a9ec436c7d0",
+      "type": "NoFilter"
+    },
+    {
+      "source": "df07bed970d7c837b92a",
+      "target": "fe6ed78bbab010d65a7c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "df07bed970d7c837b92a",
+      "target": "a1b6cfa49adb3cc6de51",
+      "type": "NoFilter"
+    },
+    {
+      "source": "df07bed970d7c837b92a",
+      "target": "cc440d1a121a70c0020c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "df07bed970d7c837b92a",
+      "target": "fabb25bdbd662d216400",
+      "type": "NoFilter"
+    }
+  ]
+}

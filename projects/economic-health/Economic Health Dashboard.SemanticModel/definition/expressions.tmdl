@@ -38,7 +38,7 @@ expression 'Headline CPI' =
 		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Added Custom2",{{"value.1", "Prior Month Value"}}),
 		    #"Added Custom3" = Table.AddColumn(#"Renamed Columns1", "Value MoM", each [value]/[Prior Month Value]-1),
 		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom3",{"date", "value", "Value YoY", "Value MoM"}),
-		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Headline CPI"}, {"Value YoY", "Headline CPI (YoY)"}, {"Value MoM", "Headline CPI (MoM)"}}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Headline CPI"}, {"Value YoY", "Headline CPI (YoY)"}, {"Value MoM", "1-Month Change (Headline)"}}),
 		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Renamed Columns2", {"date"}, "Attribute", "Value"),
 		    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Other Columns",{{"Value", type number}})
 		in
@@ -305,7 +305,7 @@ expression 'Core CPI' =
 		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Added Custom2",{{"value.1", "Prior Month Value"}}),
 		    #"Added Custom3" = Table.AddColumn(#"Renamed Columns1", "Value MoM", each [value]/[Prior Month Value]-1),
 		    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom3",{"date", "value", "Value YoY", "Value MoM"}),
-		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Core CPI"}, {"Value YoY", "Core CPI (YoY)"}, {"Value MoM", "Core CPI (MoM)"}}),
+		    #"Renamed Columns2" = Table.RenameColumns(#"Removed Other Columns",{{"value", "Core CPI"}, {"Value YoY", "Core CPI (YoY)"}, {"Value MoM", "1-Month Change (Core)"}}),
 		    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Renamed Columns2", {"date"}, "Attribute", "Value"),
 		    #"Changed Type1" = Table.TransformColumnTypes(#"Unpivoted Other Columns",{{"Value", type number}})
 		in
